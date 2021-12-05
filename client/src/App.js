@@ -1,32 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState, useEffect } from 'react';
+import './App.css'
 
-function App() { 
 
-  const [count, setCount] = useState([]);
-  useEffect(() => {
-    fetch('/users').then(res=>res.json()).then(res=>setCount(res));
-  })
+  function Table(){
+  let [elems, setElems] = useState();
+  useEffect(()=>{
+    fetch('/users').then(res=>res.json()).then(res=>setElems(res))},[]);
+    if(elems!==undefined){
+    let listRows = [];
+    for(let i=0;i<3;i+=1 ){
+      let listItems=[];
+     for(let j=0;j<3;j+=1 ){
+      listItems.push(<td>{elems[i][j]}</td>)
+     }
+     listRows.push(<tr>{listItems}</tr>)
+}   
+    return (<table>{listRows}</table>)}
+    else return<div></div>;
+    }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-         {count} Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+   
+  
+export default Table;
