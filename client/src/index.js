@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Table from './App';
+import App from './App';
    
 ReactDOM.render(
   <React.Fragment>
- <Table />
+ <App />
 </React.Fragment>,
    
 
