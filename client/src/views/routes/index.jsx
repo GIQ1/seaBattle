@@ -4,14 +4,10 @@ import Table from "../elems/Table";
 function routes() {
 
   return (
-     <Routes>
-      <Route path='/' element={<LoginForm/>}>
-      </Route>
-      <Route path='/main' element={<Table/>}>
-      </Route>
-      <Route path='*' element={<div>404</div>}>
-      </Route>
-      </Routes>
+   <Routes>
+    <Route path="/" element={<LoginForm />}/>
+    <Route path="/main"  element={<Table />}/>
+  </Routes>
   );
 }
 
