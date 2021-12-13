@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
@@ -13,26 +13,34 @@ async function loginUser(credentials) {
    }
 
 
-function LoginForm({ setToken }){
- const [username,SetUsername] = useState();
- const [password,SetPassword] = useState();
+function LoginForm(props){
+  console.log(props);
+ const [username,setUsername] = useState();
+ const [password,setPassword] = useState();
+ const [message,setMessage] = useState();
 
  const handleSubmit = async e => {
     e.preventDefault();
     const token = await loginUser({username,password});
-     setToken(token);
+    if(token.token!==null){
+      props(token);
+    }else
+      setMessage(token.response)
+ 
+    
   }
        
     return (
         <div>
         <form  onSubmit={handleSubmit}>
             <legend>Введите имя</legend>
-            <input onChange={e=>{SetUsername(e.target.value)}}></input>
+            <input onChange={e=>{setUsername(e.target.value)}}></input>
             <legend>Введите пароль</legend>
-            <input onChange={e=>{SetPassword(e.target.value)}}></input>
+            <input onChange={e=>{setPassword(e.target.value)}}></input>
             <button>Подтвердить</button>
+            
         </form>
-        
+        <div>{message}</div>
         </div>
         )
 }
