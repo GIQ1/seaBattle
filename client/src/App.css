@@ -4,7 +4,12 @@
     "h h"
     "n c";
     grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 18fr;
     width: 1200px;
+ 
+}
+.app-content{
+    background-color: rgb(165, 128, 74);
+    grid-area: c;
 }
 

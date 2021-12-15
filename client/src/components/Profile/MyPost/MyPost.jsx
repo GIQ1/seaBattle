@@ -3,7 +3,7 @@ import s from './MyPost.module.css';
 import Post from "./Post/Post";
 
 const MyPost = () => {
-    return <div>
+    return <div className={s.postBlock}>
         <div> 
         <textarea></textarea>
         <button>ADD </button>

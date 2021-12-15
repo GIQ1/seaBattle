@@ -2,11 +2,10 @@
     grid-area: n;
     background-color: red;
     width: 120px;
+    padding: 20px;
     }
-    
+
     .item{
         color: white;
-    }
-    .item.active{
-        color: blue;
+        
     }
