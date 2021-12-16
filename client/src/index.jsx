@@ -1,10 +1,14 @@
+import state, { subscribe } from './redux/state';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import state from './redux/state';
 
-ReactDOM.render(<App
-  postDate={state.profilePage.postDate}
-  dialogData={state.messagesPage.dialogData}
-  messageItem={state.messagesPage.messageItem}
-/>, document.getElementById('root'));
+const rerenderTree = () => {
+  ReactDOM.render(<App
+    state={state}
+  />, document.getElementById('root'));
+};
+
+rerenderTree();
+
+subscribe(rerenderTree);
