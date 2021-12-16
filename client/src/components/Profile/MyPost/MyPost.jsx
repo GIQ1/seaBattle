@@ -1,19 +1,17 @@
-import React from "react";
+import React from 'react';
 import s from './MyPost.module.css';
-import Post from "./Post/Post";
+import Post from './Post/Post';
 
-const MyPost = () => {
-    return <div className={s.postBlock}>
-        <div> 
-        <textarea></textarea>
-        <button>ADD </button>
-        </div>
-        <Post number={1}/>
-        <Post number={2}/>
-        <Post number={3}/>
-        <Post number={4}/>
-        <Post number={5}/>
+const MyPost = function (props) {
+  const posts = props.postDate.map((prop) => <Post number={prop.number} />);
+  return (
+    <div className={s.postBlock}>
+      <div>
+        <textarea />
+        <button>ADD</button>
+      </div>
+      {posts}
     </div>
-
-}
+  );
+};
 export default MyPost;

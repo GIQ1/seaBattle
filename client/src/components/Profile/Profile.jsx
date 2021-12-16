@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react';
 import s from './Profile.module.css';
-import MyPost from "./MyPost/MyPost";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPost from './MyPost/MyPost';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-const Profile = () => {
-  return <div className={s.content}>
-    <ProfileInfo/>
-    <MyPost />
-  </div>
-
-}
+const Profile = function (props) {
+  return (
+    <div className={s.content}>
+      <ProfileInfo />
+      <MyPost postDate={props.postDate} />
+    </div>
+  );
+};
 export default Profile;
