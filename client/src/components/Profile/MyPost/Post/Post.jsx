@@ -4,8 +4,7 @@ import s from './Post.module.css';
 const Post = function (props) {
   return (
     <div className={s.item}>
-      post
-      {props.number}
+      {props.date}
     </div>
   );
 };

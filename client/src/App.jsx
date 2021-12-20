@@ -10,8 +10,10 @@ import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 const App = function (props) {
+
   return (
     <Router>
       <div className="app">
@@ -22,23 +24,14 @@ const App = function (props) {
             <Route
               path="/profile/*"
               element={(
-                <Profile
-                  postDate={props.state.profilePage.postDate}
-                  newPostText={props.state.profilePage.newPostText}
-                  dispatch={props.dispatch}
-                />
+                <Profile/>
               )}
             />
 
             <Route
               path="/dialogs/"
               element={(
-                <Dialogs
-                  dialogData={props.state.messagesPage.dialogData}
-                  messageItem={props.state.messagesPage.messageItem}
-                  messageText={props.state.messagesPage.messageText}
-                  dispatch={props.dispatch}
-                />
+                <DialogsContainer/>
 )}
             />
           </Routes>

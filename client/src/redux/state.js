@@ -1,3 +1,6 @@
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+
 let store = {
   _state: {
     profilePage: {
@@ -11,7 +14,7 @@ let store = {
       ],
       newPostText: '',
     },
-    messagesPage: {
+    dialogsPage: {
       dialogData: [
         { id: 1, name: 'name 1' },
         { id: 2, name: 'name 2' },
@@ -26,45 +29,25 @@ let store = {
       ],
       messageText: '',
     },
+    sidebar:{}
 },
 
 getState(){
   return this._state;
 },
 
-rerenderTree(){
+_rerenderTree(){
   console.log('changed');
 },
 
   subscribe(observer){
-  this.rerenderTree = observer;
+  this._rerenderTree = observer;
   },
   dispatch(action){
-    if(action.type == 'ADD-POST'){
-        const newPost = {
-          id: 5,
-          number: this._state.profilePage.newPostText,
-        };
-        this._state.profilePage.postDate.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this.rerenderTree(this);
-    } else if(action.type == 'UPDATE-NEW-POST-TEXT'){
+    this._state.profilePage=profileReducer(this._state.profilePage, action);
+    this._state.messagesPage=dialogsReducer(this._state.messagesPage, action);
 
-        this._state.profilePage.newPostText = action.newText;
-        this.rerenderTree(this);
-
-      } else if(action.type == 'ADD-MESSAGE'){
-        const newMessage = {
-          id: 5,
-          date: this._state.messagesPage.messageText,
-        };
-        this._state.messagesPage.messageItem.push(newMessage);
-        this._state.messagesPage.messageText = '';
-        this.rerenderTree(this);
-      }else if(action.type == 'UPDATE-NEW-MESSAGE-TEXT'){
-        this._state.messagesPage.messageText = action.newText;
-        this.rerenderTree(this);
-      }
+    this._rerenderTree(this);
   }
 
 }
