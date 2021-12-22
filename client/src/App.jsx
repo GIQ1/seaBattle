@@ -9,8 +9,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersPage from './components/Users/UsersPage';
 
 const App = function (props) {
 
@@ -27,12 +27,17 @@ const App = function (props) {
                 <Profile/>
               )}
             />
-
             <Route
               path="/dialogs/"
               element={(
                 <DialogsContainer/>
-)}
+              )}
+            />
+             <Route
+              path="/users/"
+              element={(
+                <UsersPage/>
+              )}
             />
           </Routes>
         </div>

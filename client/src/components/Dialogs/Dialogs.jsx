@@ -9,7 +9,7 @@ const ADD_MESSAGE = 'ADD-MESSAGE'
 
 
 const Dialogs = function (props) { 
-  debugger
+  
   let dialogsElements = props.dialogsPage.dialogData.map((obj) => <DialogsItem id={obj.id} name={obj.name} />);
   let messagesElements = props.dialogsPage.messageItem.map((obj) => <MessageItem id={obj.id} content={obj.date} />);
 
