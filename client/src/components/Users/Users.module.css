@@ -1,0 +1,8 @@
+.selected{
+    font-size: 20px;
+    font-weight: bolder;
+    background-color: rgb(220, 233, 233);
+}
+.item{
+    background-color: aqua;
+}
