@@ -1,9 +1,13 @@
 import React from 'react';
 import User from './User/User';
+import * as axios from 'axios'
 
 const Users = (props) =>{
+  let getUsers = () =>{
     if (props.usersDate.length == 0)
-    props.setUsers([
+<<<<<<< Updated upstream
+    props.setUsers(
+    [
         { 
            id: 1, 
            name: {first: 'first 1', second: 'second 1'}, 
@@ -32,12 +36,23 @@ const Users = (props) =>{
             sity:"Sity 3"
            },
            followed: false,
-         }    
-   ])
+    }])
+
+    let users = props.usersDate.map(date => <User date={date} follow={props.Follow}/>)
+    
+    return ( users )
+=======
+    axios.get("/users").then(res =>{
+        props.setUsers(res.data);
+    })
+  }
+ 
+   
 
     let users = props.usersDate.map(date => <User date={date} follow={props.Follow}/>)
 
-    return ( users )
+    return (<> <button onClick={()=>{ getUsers();}}>GET USERS</button> {users} </> )
+>>>>>>> Stashed changes
 }
 
 

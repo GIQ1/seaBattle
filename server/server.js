@@ -56,17 +56,52 @@ app.use('/login',urlencodedParser, (req, res) => {
   
 });
 
-app.get('/date',urlencodedParser, (req, res) => {
-  let mas=[];
-  for (let i=0; i<10; i++) {
-    mas[i]=new Array(10);
-  }
-     for (let i=0;i<10;i++)
-      for (let j=0;j<10;j++)
-        mas[i][j]=0;
+// app.get('/date',urlencodedParser, (req, res) => {
+//   let mas=[];
+//   for (let i=0; i<10; i++) {
+//     mas[i]=new Array(10);
+//   }
+//      for (let i=0;i<10;i++)
+//       for (let j=0;j<10;j++)
+//         mas[i][j]=0;
     
-  res.json(mas);
+//   res.json(mas);
+// })
+app.get('/users',urlencodedParser, (req, res) => {
+  let users=[
+    { 
+       id: 1, 
+       name: {first: 'first 1', second: 'second 1'}, 
+       status: 'stat 1', 
+       place:{
+        country:"Country 1",
+        sity:"Sity 1"
+       },
+       followed: false,},
+     { 
+       id: 2, 
+       name: {first: 'first 2', second: 'second 2'}, 
+       status: 'stat 2', 
+       place:{
+        country:"Country 2",
+        sity:"Sity 2"
+       },
+       followed: false,
+     },
+     { 
+       id: 3, 
+       name: {first: 'first 3', second: 'second 3'}, 
+       status: 'stat 3', 
+       place:{
+        country:"Country 3",
+        sity:"Sity 3"
+       },
+       followed: false,
+     }    
+  ];
+  res.json(users);
 })
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

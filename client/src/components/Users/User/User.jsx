@@ -2,7 +2,6 @@ import React from "react"
 import s from './User.module.css'
 
 const User = (props) =>{
-    debugger
     return (<div className={s.block}>
         <div className={s.leftPart}> 
            <div className={s.leftPartDate}>

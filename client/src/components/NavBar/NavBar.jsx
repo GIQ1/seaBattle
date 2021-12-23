@@ -15,6 +15,9 @@ const NavBar = function () {
         <Link to="/dialogs">Dialogs</Link>
       </div>
       <div className={s.item}>
+        <Link to="/users">Users</Link>
+      </div>
+      <div className={s.item}>
         <a>Music</a>
       </div>
       <div className={s.item}>
