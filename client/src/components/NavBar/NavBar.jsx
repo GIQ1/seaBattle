@@ -9,7 +9,7 @@ const NavBar = function () {
         <a>News</a>
       </div>
       <div className={s.item}>
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile?id=0">Profile</Link>
       </div>
       <div className={s.item}>
         <Link to="/dialogs">Dialogs</Link>

@@ -4,9 +4,10 @@ let initialState = {
     usersDate: [
      
     ],
-    pageSize:5,
+    pageSize:10,
     totalUsersCount: 0,
-    currentPage:1
+    currentPage:1,
+    isLoading:false
   }
 
 const usersReducer = (state = initialState, action) =>{
@@ -25,6 +26,9 @@ const usersReducer = (state = initialState, action) =>{
       case 'SET-TOTAL-COUNT':{
         return {...state, totalUsersCount: action.totalCount}
         }
+        case 'TOGGLE-LOADING':{
+          return {...state, isLoading:action.isLoading}
+          }
     default: 
     return state
 }

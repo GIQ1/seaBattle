@@ -8,6 +8,7 @@ let initialState = {
       { id: 6, date: 6 },
     ],
     newPostText: '',
+    userProfile: null,
   }
 
 const profileReducer = (state = initialState, action) =>{
@@ -30,9 +31,11 @@ const profileReducer = (state = initialState, action) =>{
 
         return stateCopy
 }
+case 'SET-USER-PROFILE':{
+  return {...state, userProfile: action.userProfile}
+}
         default:
-
-        return state
+         return state
 }
 }
 

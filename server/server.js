@@ -1,7 +1,355 @@
 import express from 'express'
 import  pg  from 'pg';
 
-
+let items=[
+  { 
+     id: 1, 
+     name: {first: 'first 1', second: 'second 1'}, 
+     status: 'stat 1', 
+     place:{
+      country:"Country 1",
+      sity:"Sity 1"
+     },
+     followed: false,},
+   { 
+     id: 2, 
+     name: {first: 'first 2', second: 'second 2'}, 
+     status: 'stat 2', 
+     place:{
+      country:"Country 2",
+      sity:"Sity 2"
+     },
+     followed: false,
+   },
+   { 
+     id: 3, 
+     name: {first: 'first 3', second: 'second 3'}, 
+     status: 'stat 3', 
+     place:{
+      country:"Country 3",
+      sity:"Sity 3"
+     },
+     followed: false,
+   },
+   { 
+    id: 4, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 5, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 6, 
+    name: {first: 'sfafsaga 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  },
+  { 
+    id: 7, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 8, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 9, 
+    name: {first: 'first 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  },
+  { 
+    id: 10, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 11, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 12, 
+    name: {first: 'first 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  }, { 
+    id:13, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 14, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 15, 
+    name: {first: 'first 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  },
+  { 
+    id: 16, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 17, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 18, 
+    name: {first: 'first 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  },
+  { 
+    id: 19, 
+    name: {first: 'first 1', second: 'second 1'}, 
+    status: 'stat 1', 
+    place:{
+     country:"Country 1",
+     sity:"Sity 1"
+    },
+    followed: false,},
+  { 
+    id: 20, 
+    name: {first: 'first 2', second: 'second 2'}, 
+    status: 'stat 2', 
+    place:{
+     country:"Country 2",
+     sity:"Sity 2"
+    },
+    followed: false,
+  },
+  { 
+    id: 21, 
+    name: {first: 'first 3', second: 'second 3'}, 
+    status: 'stat 3', 
+    place:{
+     country:"Country 3",
+     sity:"Sity 3"
+    },
+    followed: false,
+  },
+  { 
+   id: 22, 
+   name: {first: 'first 1', second: 'second 1'}, 
+   status: 'stat 1', 
+   place:{
+    country:"Country 1",
+    sity:"Sity 1"
+   },
+   followed: false,},
+ { 
+   id:23, 
+   name: {first: 'first 2', second: 'second 2'}, 
+   status: 'stat 2', 
+   place:{
+    country:"Country 2",
+    sity:"Sity 2"
+   },
+   followed: false,
+ },
+ { 
+   id: 24, 
+   name: {first: 'first 3', second: 'second 3'}, 
+   status: 'stat 3', 
+   place:{
+    country:"Country 3",
+    sity:"Sity 3"
+   },
+   followed: false,
+ },
+ { 
+   id: 25, 
+   name: {first: 'first 1', second: 'second 1'}, 
+   status: 'stat 1', 
+   place:{
+    country:"Country 1",
+    sity:"Sity 1"
+   },
+   followed: false,},
+ { 
+   id: 26, 
+   name: {first: 'first 2', second: 'second 2'}, 
+   status: 'stat 2', 
+   place:{
+    country:"Country 2",
+    sity:"Sity 2"
+   },
+   followed: false,
+ },
+ { 
+   id: 27, 
+   name: {first: 'first 3', second: 'second 3'}, 
+   status: 'stat 3', 
+   place:{
+    country:"Country 3",
+    sity:"Sity 3"
+   },
+   followed: false,
+ },
+ { 
+   id: 28, 
+   name: {first: 'first 1', second: 'second 1'}, 
+   status: 'stat 1', 
+   place:{
+    country:"Country 1",
+    sity:"Sity 1"
+   },
+   followed: false,},
+ { 
+   id: 29, 
+   name: {first: 'first 2', second: 'second 2'}, 
+   status: 'stat 2', 
+   place:{
+    country:"Country 2",
+    sity:"Sity 2"
+   },
+   followed: false,
+ },
+ { 
+   id: 30, 
+   name: {first: 'first 3', second: 'second 3'}, 
+   status: 'stat 3', 
+   place:{
+    country:"Country 3",
+    sity:"Sity 3"
+   },
+   followed: false,
+ }, { 
+   id: 31, 
+   name: {first: 'first 1', second: 'second 1'}, 
+   status: 'stat 1', 
+   place:{
+    country:"Country 1",
+    sity:"Sity 1"
+   },
+   followed: false,},
+ { 
+   id: 32, 
+   name: {first: 'first 2', second: 'second 2'}, 
+   status: 'stat 2', 
+   place:{
+    country:"Country 2",
+    sity:"Sity 2"
+   },
+   followed: false,
+ },
+ { 
+   id: 33, 
+   name: {first: 'first 3', second: 'second 3'}, 
+   status: 'stat 3', 
+   place:{
+    country:"Country 3",
+    sity:"Sity 3"
+   },
+   followed: false,
+ },
+ { 
+   id: 34, 
+   name: {first: 'first 1', second: 'second 1'}, 
+   status: 'stat 1', 
+   place:{
+    country:"Country 1",
+    sity:"Sity 1"
+   },
+   followed: false,},
+ { 
+   id: 35, 
+   name: {first: 'first 2', second: 'second 2'}, 
+   status: 'stat 2', 
+   place:{
+    country:"Country 2",
+    sity:"Sity 2"
+   },
+   followed: false,
+ },
+ { 
+   id: 36, 
+   name: {first: 'first 3', second: 'second 3'}, 
+   status: 'stat 3', 
+   place:{
+    country:"Country 3",
+    sity:"Sity 3"
+   },
+   followed: false,
+ }
+      
+];
 // const DB = new pg.Client({
 //   host: 'localhost',
 //   user: 'postgres',
@@ -55,18 +403,6 @@ app.use('/login',urlencodedParser, (req, res) => {
   
   
 });
-
-// app.get('/date',urlencodedParser, (req, res) => {
-//   let mas=[];
-//   for (let i=0; i<10; i++) {
-//     mas[i]=new Array(10);
-//   }
-//      for (let i=0;i<10;i++)
-//       for (let j=0;j<10;j++)
-//         mas[i][j]=0;
-    
-//   res.json(mas);
-// })
 app.get('/users',urlencodedParser, (req, res) => {
   if(req.query.count>100) req.query.count=100;
   if(req.query.count==undefined) req.query.count=10;
@@ -77,358 +413,9 @@ app.get('/users',urlencodedParser, (req, res) => {
   let users = {};
   let min = (page-1) *count;
   let max = page * count-1;
-  console.log(min+" "+ max);
   users.error = null;
 
-  let items=[
-    { 
-       id: 1, 
-       name: {first: 'first 1', second: 'second 1'}, 
-       status: 'stat 1', 
-       place:{
-        country:"Country 1",
-        sity:"Sity 1"
-       },
-       followed: false,},
-     { 
-       id: 2, 
-       name: {first: 'first 2', second: 'second 2'}, 
-       status: 'stat 2', 
-       place:{
-        country:"Country 2",
-        sity:"Sity 2"
-       },
-       followed: false,
-     },
-     { 
-       id: 3, 
-       name: {first: 'first 3', second: 'second 3'}, 
-       status: 'stat 3', 
-       place:{
-        country:"Country 3",
-        sity:"Sity 3"
-       },
-       followed: false,
-     },
-     { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'sfafsaga 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    },
-    { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'first 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    },
-    { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'first 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    }, { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'first 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    },
-    { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'first 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    },
-    { 
-      id: 1, 
-      name: {first: 'first 1', second: 'second 1'}, 
-      status: 'stat 1', 
-      place:{
-       country:"Country 1",
-       sity:"Sity 1"
-      },
-      followed: false,},
-    { 
-      id: 2, 
-      name: {first: 'first 2', second: 'second 2'}, 
-      status: 'stat 2', 
-      place:{
-       country:"Country 2",
-       sity:"Sity 2"
-      },
-      followed: false,
-    },
-    { 
-      id: 3, 
-      name: {first: 'first 3', second: 'second 3'}, 
-      status: 'stat 3', 
-      place:{
-       country:"Country 3",
-       sity:"Sity 3"
-      },
-      followed: false,
-    },
-    { 
-     id: 1, 
-     name: {first: 'first 1', second: 'second 1'}, 
-     status: 'stat 1', 
-     place:{
-      country:"Country 1",
-      sity:"Sity 1"
-     },
-     followed: false,},
-   { 
-     id: 2, 
-     name: {first: 'first 2', second: 'second 2'}, 
-     status: 'stat 2', 
-     place:{
-      country:"Country 2",
-      sity:"Sity 2"
-     },
-     followed: false,
-   },
-   { 
-     id: 3, 
-     name: {first: 'first 3', second: 'second 3'}, 
-     status: 'stat 3', 
-     place:{
-      country:"Country 3",
-      sity:"Sity 3"
-     },
-     followed: false,
-   },
-   { 
-     id: 1, 
-     name: {first: 'first 1', second: 'second 1'}, 
-     status: 'stat 1', 
-     place:{
-      country:"Country 1",
-      sity:"Sity 1"
-     },
-     followed: false,},
-   { 
-     id: 2, 
-     name: {first: 'first 2', second: 'second 2'}, 
-     status: 'stat 2', 
-     place:{
-      country:"Country 2",
-      sity:"Sity 2"
-     },
-     followed: false,
-   },
-   { 
-     id: 3, 
-     name: {first: 'first 3', second: 'second 3'}, 
-     status: 'stat 3', 
-     place:{
-      country:"Country 3",
-      sity:"Sity 3"
-     },
-     followed: false,
-   },
-   { 
-     id: 1, 
-     name: {first: 'first 1', second: 'second 1'}, 
-     status: 'stat 1', 
-     place:{
-      country:"Country 1",
-      sity:"Sity 1"
-     },
-     followed: false,},
-   { 
-     id: 2, 
-     name: {first: 'first 2', second: 'second 2'}, 
-     status: 'stat 2', 
-     place:{
-      country:"Country 2",
-      sity:"Sity 2"
-     },
-     followed: false,
-   },
-   { 
-     id: 3, 
-     name: {first: 'first 3', second: 'second 3'}, 
-     status: 'stat 3', 
-     place:{
-      country:"Country 3",
-      sity:"Sity 3"
-     },
-     followed: false,
-   }, { 
-     id: 1, 
-     name: {first: 'first 1', second: 'second 1'}, 
-     status: 'stat 1', 
-     place:{
-      country:"Country 1",
-      sity:"Sity 1"
-     },
-     followed: false,},
-   { 
-     id: 2, 
-     name: {first: 'first 2', second: 'second 2'}, 
-     status: 'stat 2', 
-     place:{
-      country:"Country 2",
-      sity:"Sity 2"
-     },
-     followed: false,
-   },
-   { 
-     id: 3, 
-     name: {first: 'first 3', second: 'second 3'}, 
-     status: 'stat 3', 
-     place:{
-      country:"Country 3",
-      sity:"Sity 3"
-     },
-     followed: false,
-   },
-   { 
-     id: 1, 
-     name: {first: 'first 1', second: 'second 1'}, 
-     status: 'stat 1', 
-     place:{
-      country:"Country 1",
-      sity:"Sity 1"
-     },
-     followed: false,},
-   { 
-     id: 2, 
-     name: {first: 'first 2', second: 'second 2'}, 
-     status: 'stat 2', 
-     place:{
-      country:"Country 2",
-      sity:"Sity 2"
-     },
-     followed: false,
-   },
-   { 
-     id: 3, 
-     name: {first: 'first 3', second: 'second 3'}, 
-     status: 'stat 3', 
-     place:{
-      country:"Country 3",
-      sity:"Sity 3"
-     },
-     followed: false,
-   }
-        
-  ];
+  
   let item = [];
   if(min>items.length) 
   users.error='limit'
@@ -444,6 +431,11 @@ app.get('/users',urlencodedParser, (req, res) => {
   
   
   res.json(users);
+})
+app.get('/profile',urlencodedParser, (req, res) => {
+ console.log(req.query)
+  res.json(items[req.query.id])
+  
 })
 
 

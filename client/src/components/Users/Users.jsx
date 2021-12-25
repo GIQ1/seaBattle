@@ -10,11 +10,12 @@ const Users = (props) =>{
      pages.push(i);
    }
     let users = props.usersDate.map(date => <User date={date} follow={props.Follow}/>);
-    return ( <>
-      <div>
+    return (
+      <>
+         {props.isLoading ? <img src='https://cdn.dribbble.com/users/108183/screenshots/2301400/spinnervlll.gif'></img> : <div>
       {pages.map(d => {return <span onClick={()=> props.changeUser(d)} className={props.currentPage === d ? s.selected: s.item}>{d}</span>})}
-      </div>
-          {props.usersDate.map(date => <User date={date} follow={props.Follow}/>)}
+        {props.usersDate.map(date => <User date={date} follow={props.follow}/>)}
+        </div>}
           </>);
 }
 

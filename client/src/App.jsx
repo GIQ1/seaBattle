@@ -8,9 +8,9 @@ import './App.css';
 
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
-import Profile from './components/Profile/Profile';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersPage from './components/Users/UsersPage';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App = function (props) {
 
@@ -24,7 +24,7 @@ const App = function (props) {
             <Route
               path="/profile/*"
               element={(
-                <Profile/>
+                <ProfileContainer/>
               )}
             />
             <Route

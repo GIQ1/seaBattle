@@ -3,10 +3,10 @@ import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostContainer from './MyPost/MyPostContainer';
 
-const Profile = function () {
+const Profile = function (props) {
   return (
     <div className={s.content}>
-      <ProfileInfo />
+      <ProfileInfo {...props}/>
       <MyPostContainer/>
     </div>
   );
