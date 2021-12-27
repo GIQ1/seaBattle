@@ -1,22 +1,38 @@
 import React from 'react';
 import s from './MyPost.module.css';
 import Post from './Post/Post';
+import {Field,reduxForm} from 'redux-form';
+import { maxLengthCreator, requiredField } from '../../utils/validators/validators';
+import { Textarea } from '../../../common/FormsControls';
 
+const maxLength10 = maxLengthCreator(10)
 
 const MyPost = function (props) {
+
   const posts = props.profilePage.postDate.map((prop) => <Post date={prop.date} />);
-  const newPostElem = React.createRef();
   return (
     <div className={s.postBlock}>
+       <form onSubmit={props.handleSubmit}>
       <div>
-        <textarea ref={newPostElem} value={props.profilePage.newPostText} onChange={() => props.onPostChange(newPostElem.current.value)} />
-        <button onClick={() => props.addPost()}>ADD</button>
+      <Field placeholder='post' component={Textarea} name={'post'} validate={[requiredField,maxLength10]}/>
+        <button>ADD</button>
       </div>
-      {posts}
+      </form>
+       {posts}
     </div>
   );
 };
-export default MyPost;
+
+const MyPostReduxForm = reduxForm({form:'post'})(MyPost)
+
+const postContainer = function (props) { 
+  const onSubmit = (formData) =>{
+    props.addPost(formData.post)
+  }
+
+  return <MyPostReduxForm onSubmit={onSubmit}{...props}/>
+};
+export default postContainer;
 
 
 

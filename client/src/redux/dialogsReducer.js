@@ -11,7 +11,6 @@ let initialState = {
         { id: 2, date: 'mess 2' },
         { id: 3, date: 'mess 3' },
     ],
-    messageText: '',
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -19,20 +18,13 @@ const dialogsReducer = (state = initialState, action) => {
         case 'ADD-MESSAGE':
             {
                 const newMessage = {
-                    id: 5,
-                    date: state.messageText,
+                    id: state.messageItem.length,
+                    date: action.message,
                 };
                 let stateCopy = {...state,
-                    messageText: '',
                     messageItem: [...state.messageItem, newMessage]
                 }
 
-                return stateCopy
-            }
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            {
-                let stateCopy = {...state }
-                stateCopy.messageText = action.newText;
                 return stateCopy
             }
         default:

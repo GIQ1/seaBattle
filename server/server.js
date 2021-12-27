@@ -1,9 +1,10 @@
 import express from 'express'
 import pg from 'pg';
 
-let login = {
+let loginUser = {
     userId: 0,
-    name: 'you'
+    login: 'you',
+
 }
 let items = [{
         id: 0,
@@ -226,21 +227,31 @@ const app = express()
 const port = 3001
 
 
-
-
-
 const urlencodedParser = express.urlencoded({ extended: false });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/auth', urlencodedParser, (req, res) => {
-    console.log(req.query)
-    res.json(login)
+app.post('/auth', urlencodedParser, (req, res) => {
+    let data = req.body.data
+if(data.login=='admin' && data.password=='1')
+    res.json({...loginUser,message:'OK', isAuth:true})
+    else{
+        res.json({message:'Login error' ,isAuth:false})
+    }
 
+});
+app.get('/auth/me', urlencodedParser, (req, res) => {
+    console.log(req.query)
+    res.json({...loginUser,message:'OK', isAuth:true})
+});
+
+app.delete('/auth', urlencodedParser, (req, res) => {
+    res.json({message:'OK'})
 });
 // app.get('/auth/me', urlencodedParser, (req, res) => {
 //     res.json(login)
 // });
+
 
 app.get('/users', urlencodedParser, (req, res) => {
     if (req.query.count > 100) req.query.count = 100;
@@ -275,11 +286,22 @@ app.get('/profile', urlencodedParser, (req, res) => {
     res.json(items[req.query.id])
 
 })
+app.get('/profile/status', urlencodedParser, (req, res) => {
+    res.json(items[req.query.id].status)
+  
+  })
+app.put('/profile/status', urlencodedParser, (req, res) => {
+    items[req.query.id].status=req.body.status;
+    res.json(items[req.query.id].status)
+
+})
 app.post('/follow', urlencodedParser, (req, res) => {
     items[req.query.id].followed = !items[req.query.id].followed;
     res.json({ followed: items[req.query.id].followed, status: 'OK' })
 
 })
+
+
 
 
 app.listen(port, () => {

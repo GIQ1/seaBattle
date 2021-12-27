@@ -4,17 +4,12 @@ import { connect } from 'react-redux';
 import { authRedirect } from '../hoc/authRedirect';
 import { compose } from 'redux';
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const ADD_MESSAGE = 'ADD-MESSAGE'
 
-let addMessageActionCreator = () => {
-  return { type: ADD_MESSAGE }
+let addMessageActionCreator = (data) => {
+  return { type: ADD_MESSAGE, message: data }
 
 }
-let updateNewMessageText = (text) => {
-  return { type: UPDATE_NEW_MESSAGE_TEXT, newText: text }
-}
-
 
 let mapStateToProps = (state) => {
   return {
@@ -23,11 +18,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
   return {
-    onChangeMessage: (text) => {
-      dispatch(updateNewMessageText(text))
-    },
-    addMessage: () => {
-      dispatch(addMessageActionCreator())
+    addMessage: (data) => {
+      dispatch(addMessageActionCreator(data))
     }
   }
 }

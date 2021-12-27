@@ -9,8 +9,8 @@ let initialState = {
         { id: 5, date: 5 },
         { id: 6, date: 6 },
     ],
-    newPostText: '',
     userProfile: null,
+    userStatus:null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -18,26 +18,22 @@ const profileReducer = (state = initialState, action) => {
         case 'ADD-POST':
             {
                 const newPost = {
-                    id: 5,
-                    date: state.newPostText,
+                    id: state.postDate.length,
+                    date: action.body,
                 };
                 let stateCopy = {...state };
                 stateCopy.postDate = [...state.postDate]
                 stateCopy.postDate.push(newPost);
-                stateCopy.newPostText = '';
-
-                return stateCopy
-            }
-        case 'UPDATE-NEW-POST-TEXT':
-            {
-                let stateCopy = {...state };
-                stateCopy.newPostText = action.newText;
 
                 return stateCopy
             }
         case 'SET-USER-PROFILE':
             {
                 return {...state, userProfile: action.userProfile }
+            }
+        case 'SET-USER-STATUS':
+            {
+                return {...state, userStatus: action.userStatus }
             }
         default:
             return state
@@ -47,13 +43,30 @@ const profileReducer = (state = initialState, action) => {
 
 
 let setUserProfile = (profile) => ({ type: 'SET-USER-PROFILE', userProfile: profile })
+let setUserStatus = (status) => ({ type: 'SET-USER-STATUS', userStatus: status })
 
-export const authThunkCreator = (profile) => {
+export const setProfileThunkCreator = (url) => {
     return (dispatch) => {
-        profileAPI.setProfile(profile).then(res => {
+        profileAPI.setProfile(url).then(res => {
             dispatch(setUserProfile(res))
         })
     }
+}
+export const getStatusThunkCreator = (url) => {
+        return (dispatch) => {
+            profileAPI.getStatus(url).then(res => {
+                dispatch(setUserStatus(res))
+            })
+        }
+        
+}
+export const setStatusThunkCreator = (url,status) => {
+    return (dispatch) => {
+        profileAPI.setStatus(url,status).then(res => {
+            dispatch(setUserStatus(res))
+        })
+    }
+    
 }
 
 

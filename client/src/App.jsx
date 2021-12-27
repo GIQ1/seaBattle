@@ -9,15 +9,25 @@ import NavBar from './components/NavBar/NavBar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersPage from './components/Users/UsersPage';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
-import LoginPage from './components/Login/login';
+import Header from './components/Header/Header';
+import LoginPage from './components/Login/LoginPage';
+import { connect } from 'react-redux';
+import { chekAuthThunkCreator } from './redux/authReducer';
+import { authRedirect} from "./components/hoc/authRedirect"
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { compose } from 'redux';
 
 
-const App = function () {
+const App = function (props) {
+  useEffect(() => {
+    props.chekAuthThunkCreator()
+    
+  });
   return (
     <Router>
       <div className="app">
-        <HeaderContainer />
+        <Header />
         <NavBar />
         <div className="app-content">
           <Routes>
@@ -46,11 +56,12 @@ const App = function () {
               )}
             />
           </Routes>
-
         </div>
       </div>
-    </Router>
+      </Router>
   );
 };
 
-export default App;
+
+
+export default compose(connect(null,{chekAuthThunkCreator}))(App);
