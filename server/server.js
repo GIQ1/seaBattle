@@ -241,17 +241,12 @@ if(data.login=='admin' && data.password=='1')
 
 });
 app.get('/auth/me', urlencodedParser, (req, res) => {
-    console.log(req.query)
     res.json({...loginUser,message:'OK', isAuth:true})
 });
 
 app.delete('/auth', urlencodedParser, (req, res) => {
     res.json({message:'OK'})
 });
-// app.get('/auth/me', urlencodedParser, (req, res) => {
-//     res.json(login)
-// });
-
 
 app.get('/users', urlencodedParser, (req, res) => {
     if (req.query.count > 100) req.query.count = 100;

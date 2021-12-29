@@ -21,11 +21,10 @@ const dialogsReducer = (state = initialState, action) => {
                     id: state.messageItem.length,
                     date: action.message,
                 };
-                let stateCopy = {...state,
+                return {
+                    ...state,
                     messageItem: [...state.messageItem, newMessage]
                 }
-
-                return stateCopy
             }
         default:
             return state

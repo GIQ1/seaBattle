@@ -1,10 +1,7 @@
 import { usersAPI } from "../api/api"
-import User from "../components/Users/User/User"
 
 let initialState = {
-    usersDate: [
-
-    ],
+    usersDate: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
@@ -16,10 +13,9 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FOLLOWING':
             {
-                let stateCopy = {...state }
-                stateCopy.usersDate = [...state.usersDate]
-                stateCopy.usersDate.map(d => { if (d.id == action.id) d.followed = !d.followed })
-                return stateCopy
+                let usersData = [...state.usersDate]
+                usersData.map(d => { if (d.id == action.id) d.followed = !d.followed })
+                return {...state, usersDate: usersData }
             }
         case 'SET-USERS':
             {
@@ -41,7 +37,9 @@ const usersReducer = (state = initialState, action) => {
             {
                 return {
                     ...state,
-                    isFollowing: action.isFollowing ? [...state.isFollowing, action.userID] : state.isFollowing.filter(id => id != action.userID)
+                    isFollowing: action.isFollowing
+                    ? [...state.isFollowing, action.userID]
+                    : state.isFollowing.filter(id => id != action.userID)
                 }
             }
         default:
@@ -69,27 +67,21 @@ export let toogleFollowing = (isFollowing, userID) => {
     return { type: 'TOGGLE-FOLLOWING', isFollowing, userID }
 }
 
-
-export const followThunkCreator = (data) => {
-    return (dispatch) => {
+export const followThunkCreator = (data) => async (dispatch) => {
         dispatch(toogleFollowing(true, data.id))
-        usersAPI.followUser(data.id)
-            .then(res => {
+        let res = await usersAPI.followUser(data.id)     
                 dispatch(toogleFollowing(false, data.id))
                 dispatch(follow(data.id, res.followed))
-            })
-    }
+    
 }
-export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+
+export const getUsersThunkCreator = (currentPage, pageSize) => async (dispatch) => {
         dispatch(toogleLoading(true))
         dispatch(setCurrentPage(currentPage))
-        usersAPI.getUsers(currentPage, pageSize).then(res => {
+        let res = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setUsers(res.items))
             dispatch(setTotalPageCount(res.totalCount))
             dispatch(toogleLoading(false))
-        })
-    }
 }
 
 export default usersReducer

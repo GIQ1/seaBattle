@@ -8,7 +8,6 @@ let initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case 'LOGIN':
             {
@@ -22,41 +21,30 @@ const authReducer = (state = initialState, action) => {
 }
 
 let setUserData = (data) => {
- 
     return { type: 'LOGIN', data: data }
 }
 
-export const authThunkCreator = (data) => {
-
-    return (dispatch) => {
-        authAPI.login(data).then(res => {
+export const authThunkCreator = (data) =>  async (dispatch) => {
+       let res =await authAPI.login(data)
             if(res.message =='OK')
-            dispatch(setUserData(res))
+              dispatch(setUserData(res))
             else{
                 dispatch(stopSubmit('login', {_error:res.message}))
         }
-        })
-
-    }
+}
         
-    }
-export const disauthThunkCreator = () => {
-    return (dispatch) => {   
-    authAPI.logout().then((res) => {
+    
+export const disauthThunkCreator = () => async (dispatch) => {   
+    let res = await authAPI.logout()
             if(res.message =='OK')
             dispatch(setUserData(null))
-        })
-    }
 }
 
-export const chekAuthThunkCreator = () => {
-    return (dispatch) => {   
-    authAPI.checkAuth().then((res) => {
+
+export const chekAuthThunkCreator = () => async (dispatch) => {   
+    let res = await authAPI.checkAuth()
             if(res.message =='OK')
             dispatch(setUserData(res))
-        })
-        return "asdfg";
-    }
 }
 
 export default authReducer

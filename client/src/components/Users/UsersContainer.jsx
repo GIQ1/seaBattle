@@ -8,6 +8,14 @@ import {
 } from '../../redux/usersReducer'
 import { authRedirect } from '../hoc/authRedirect';
 import { compose } from 'redux';
+import { 
+  getCurrentPage, 
+  getIsFollowing, 
+  getIsLoading, 
+  getPageSize,
+  getTotalUsersCount, 
+  getUserSuperSelector 
+} from '../../redux/usersSelectors';
 
 
 class UsersAPIComponent extends React.Component {
@@ -15,10 +23,9 @@ class UsersAPIComponent extends React.Component {
     this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
   }
   render() {
-    let changeUser = (d) => {
+    const changeUser = (d) => {
       this.props.getUsersThunkCreator(d, this.props.pageSize)
     }
-
     return (<Users {...this.props} changeUser={changeUser} />)
   }
 }
@@ -26,12 +33,12 @@ class UsersAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    usersDate: state.usersPage.usersDate,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    isFollowing: state.usersPage.isFollowing
+    usersDate: getUserSuperSelector(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isLoading: getIsLoading(state),
+    isFollowing: getIsFollowing(state)
   }
 }
 

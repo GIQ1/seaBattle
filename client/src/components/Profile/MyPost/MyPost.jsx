@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import s from './MyPost.module.css';
 import Post from './Post/Post';
 import {Field,reduxForm} from 'redux-form';
@@ -7,21 +7,21 @@ import { Textarea } from '../../../common/FormsControls';
 
 const maxLength10 = maxLengthCreator(10)
 
-const MyPost = function (props) {
-
-  const posts = props.profilePage.postDate.map((prop) => <Post date={prop.date} />);
+const MyPost = memo(props => {
+  const posts = props.profilePage.postDate.map((prop) => <Post date={prop.date} key={prop.id} />);
   return (
     <div className={s.postBlock}>
-       <form onSubmit={props.handleSubmit}>
-      <div>
-      <Field placeholder='post' component={Textarea} name={'post'} validate={[requiredField,maxLength10]}/>
-        <button>ADD</button>
-      </div>
+      <form onSubmit={props.handleSubmit}>
+        <div>
+          <Field placeholder='post' component={Textarea} name={'post'} validate={[requiredField, maxLength10]} />
+          <button>ADD</button>
+        </div>
       </form>
-       {posts}
+      {posts}
     </div>
   );
-};
+})
+
 
 const MyPostReduxForm = reduxForm({form:'post'})(MyPost)
 

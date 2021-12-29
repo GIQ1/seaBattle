@@ -1,13 +1,14 @@
 import { profileAPI } from "../api/api";
 
+const ADD_POST = 'ADD-POST'
 let initialState = {
     postDate: [
-        { id: 1, date: 1 },
-        { id: 2, date: 2 },
-        { id: 3, date: 3 },
-        { id: 4, date: 4 },
-        { id: 5, date: 5 },
-        { id: 6, date: 6 },
+        { id: 0, date: 1 },
+        { id: 1, date: 2 },
+        { id: 2, date: 3 },
+        { id: 3, date: 4 },
+        { id: 4, date: 5 },
+        { id: 5, date: 6 },
     ],
     userProfile: null,
     userStatus:null
@@ -21,11 +22,11 @@ const profileReducer = (state = initialState, action) => {
                     id: state.postDate.length,
                     date: action.body,
                 };
-                let stateCopy = {...state };
-                stateCopy.postDate = [...state.postDate]
-                stateCopy.postDate.push(newPost);
+                return {
+                    ...state,
+                    postDate: [...state.postDate, newPost]
+                }
 
-                return stateCopy
             }
         case 'SET-USER-PROFILE':
             {
@@ -45,32 +46,22 @@ const profileReducer = (state = initialState, action) => {
 let setUserProfile = (profile) => ({ type: 'SET-USER-PROFILE', userProfile: profile })
 let setUserStatus = (status) => ({ type: 'SET-USER-STATUS', userStatus: status })
 
-export const setProfileThunkCreator = (url) => {
-    return (dispatch) => {
-        profileAPI.setProfile(url).then(res => {
+export const setProfileThunkCreator = (url) => async (dispatch) => {
+        let res =await profileAPI.setProfile(url)
             dispatch(setUserProfile(res))
-        })
-    }
 }
-export const getStatusThunkCreator = (url) => {
-        return (dispatch) => {
-            profileAPI.getStatus(url).then(res => {
+export const getStatusThunkCreator = (url) => async (dispatch) => {
+           let res = await profileAPI.getStatus(url)
                 dispatch(setUserStatus(res))
-            })
-        }
+}
         
-}
-export const setStatusThunkCreator = (url,status) => {
-    return (dispatch) => {
-        profileAPI.setStatus(url,status).then(res => {
-            dispatch(setUserStatus(res))
-        })
-    }
-    
+export const setStatusThunkCreator = (url,status) => async (dispatch) => {
+        let res = await profileAPI.setStatus(url,status)
+            dispatch(setUserStatus(res))  
 }
 
-
-
-
+export const addPostActionCreator = (data) => {
+    return {type:ADD_POST,body:data}
+}
 
 export default profileReducer

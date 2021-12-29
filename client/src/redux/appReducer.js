@@ -24,7 +24,6 @@ export const initSuccess = () =>({type:'INIT-SUCCESS'})
 
 export const initApp = () =>(dispath)=> {
     dispath(chekAuthThunkCreator());
-    debugger
     dispath(initSuccess());
 }
 
